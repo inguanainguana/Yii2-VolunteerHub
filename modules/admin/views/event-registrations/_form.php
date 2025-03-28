@@ -1,0 +1,35 @@
+<?php
+
+use app\models\Event;
+use app\models\User;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+/** @var yii\web\View $this */
+/** @var app\models\EventRegistrations $model */
+/** @var yii\widgets\ActiveForm $form */
+?>
+
+<div class="event-registrations-form mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
+            <div class="row">
+    <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'event_id')->dropDownList(Event::find()->select('title')->indexBy('id')->column(), ['prompt'=>'Выберите мероприятие']) ?>
+
+    <?= $form->field($model, 'user_id')->dropDownList(User::find()->select('username')->indexBy('id')->column(), ['prompt'=>'Выберите пользователя']) ?>
+
+    <?= $form->field($model, 'registration_date')->textInput(['placeholder' => 'dd.mm.yyyy HH:mm']) ?>
+
+    <?= $form->field($model, 'status')->dropDownList($model->getStatusForReports(), ['prompt'=>'Выберите статус']) ?>
+
+
+                <div class="form-group text-center">
+                    <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+                </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>

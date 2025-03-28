@@ -1,0 +1,56 @@
+<?php
+
+use app\models\User;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+/** @var yii\web\View $this */
+/** @var app\models\Event $model */
+/** @var yii\widgets\ActiveForm $form */
+
+
+?>
+
+<div class="site-login mt-4">
+
+    <div class="card">
+        <div class="card-body">
+            <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
+
+            <div class="row">
+
+                <?php $form = ActiveForm::begin([
+                    'id' => 'register-form',
+                    'fieldConfig' => [
+                        'template' => "{label}\n{input}\n{error}",
+                        'labelOptions' => ['class' => 'col-lg-2 col-form-label mr-lg-3'],
+                        'inputOptions' => ['class' => 'col-lg-2 form-control'],
+                        'errorOptions' => ['class' => 'col-lg-8 invalid-feedback'],
+                    ],
+                    'options' => ['enctype' => 'multipart/form-data']
+                ]); ?>
+
+
+                <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+
+                <?= $form->field($model, 'start_date')->textInput(['placeholder' => 'dd.mm.yyyy HH:mm']) ?>
+
+                <?= $form->field($model, 'end_date')->textInput(['placeholder' => 'dd.mm.yyyy HH:mm']) ?>
+
+                <?= $form->field($model, 'location')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'image')->fileInput(); ?>
+
+                <?= $form->field($model, 'user_id')->dropDownList(User::find()->select('username')->indexBy('id')->column(), ['prompt'=>'Выберите пользователя']) ?>
+
+
+                <div class="form-group text-center">
+                    <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+                </div>
+
+
+    <?php ActiveForm::end(); ?>
+
+</div>

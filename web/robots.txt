@@ -1,0 +1,8 @@
+User-agent: *
+Disallow:  /admin/
+Dissalow: /admin/event/index
+Dissalow: /admin/event-registrations/index
+Dissalow: /admin/report/index
+Dissalow: /admin/reviews/index
+Dissalow: /site/profile
+Allow: *
